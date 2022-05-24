@@ -1,0 +1,54 @@
+\documentclass[aspectratio=43, xcolor=table]{beamer}
+%\usepackage[english]{babel}
+
+%Cargar paquetes
+\usepackage[utf8]{inputenc}%Permite usar acentos
+\usepackage[spanish]{babel}%Configura el idioma por defecto a español
+\usepackage{amsmath}%Introduce términos matemáticos
+\usepackage{graphicx}%Permite introducir figuras
+\usepackage[options]{natbib}%Bibliografía con estilos %No funcionan estilos en Beamer
+\newcommand{\grad}{\hspace{-2mm}$\phantom{a}^{\circ}$}
+
+\input{chapters/preamble}
+\title{Modelado conceptual con BPMN} %->->->->-> Check hyperref title <-<-<-<-<-
+%\subtitle{And Some Things About It}
+\author[C.J. Uribe-Martes]{Carlos Javier Uribe Martes}
+\institute[CUC]{
+    Ingeniería Industrial%
+    \\%
+    Universidad de la Costa%
+} %You can change the Institution if you are from somewhere else
+\date{Marzo 01, 2020}
+%\logo{\includegraphics[width= 0.2\textwidth]{images/a-logo.png}}
+
+\begin{document}
+    
+    \frame{\titlepage}
+    
+    \begin{frame}{Contenido}
+        \tableofcontents
+    \end{frame}
+    
+    \input{chapters/conceptualmodeling}
+    
+    \input{chapters/bpmn}
+    
+    %\input{chapters/inventory}
+    
+    \section*{Referencias} %You can remove this if you do not want to use it
+    \nocite{freund}
+        \begin{frame}{Referencias}
+            \printbibliography
+        \end{frame}
+     
+    \section{}   
+        \begin{frame}{}
+            \begin{figure}
+                \centering
+                \includegraphics[width=6cm]{images/model.png}
+                %\caption{Caption}
+                %\label{fig:my_label}
+            \end{figure}
+        \end{frame}
+
+\end{document}

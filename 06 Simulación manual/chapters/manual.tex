@@ -1,0 +1,92 @@
+\section{Simulación manual}
+
+\begin{frame}{Simulación de eventos discretos}
+    \begin{itemize}
+        \item Aunque la simulación por eventos discretos puede conceptualmente realizarse a mano, la cantidad de datos que deben almacenarse y manipularse para la mayoría de las aplicaciones reales involucra el uso de un computador.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Simulación manual}{Reloj de la simulación}
+    \begin{itemize}
+        \item Dada la naturaleza dinámica de los modelos de simulación por eventos discretos, se requiere hacer seguimiento del valor actual del \textit{tiempo simulado}.
+        \item De igual forma, se requiere un mecanismo para avanzar el tiempo simulado de un valor a otro.
+        \item La variable dentro de un modelo de simulación que guarda el valor actual del tiempo simulado se llama \textit{reloj de la simulación}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{¿Cómo empezar a simular?}
+    \begin{itemize}
+        \item Hasta que se encuentre cómodo con sus competencias de modelado se recomienda responder a las siguientes preguntas:
+        \begin{itemize}
+            \item ¿Cuál es el sistema? ¿Qué información se conoce del sistema?
+            \item ¿Cuáles son las medidas de desempeños requeridas?
+            \item ¿Cuáles son las entidades? ¿Qué información debe ser almacenada o tenida en cuenta para cada entidad? ¿Cómo ingresas las entidades al sistema?
+            \item ¿Cuáles son los recursos que utilizan las entidades? ¿Qué entidades usan cuáles recursos y cómo?
+            \item ¿Cuáles son los flujos del proceso? Diagrame el flujo del proceso o un diagrama de actividad preliminar.
+            \item Desarrolle un pseudo-código para el modelo o un modelo conceptual completo.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Simulación manual}
+    \begin{itemize}
+        \item El analista debe definir:
+        \begin{enumerate}
+            \item Entradas: Parámetros exógenos que, usualmente, son independientes de otras características del sistema.
+            \item Salidas: Valores utilizados para calcular las medidas de desempeño del sistema (respuestas o indicadores).
+            \item Estados del sistema: Conjunto de variables de estado que definen el sistema en un momento dado.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Pasos para realizar una simulación manual}
+    \begin{itemize}
+        \item Se recomienda al analista seguir estas pautas:
+        \begin{enumerate}
+            \item Determine las características de cada entrada.
+            \item Determine las actividades, eventos y estados del sistema relevantes.
+            \item Determine el resumen de las medidas de desempeño requeridas.
+            \item Determinar las salidas requeridas para calcular las medidas de desempeño.
+            \item Construir una tabla de simulación.
+            \item En cada paso, genere un valor para las actividades, encuentre los estados del sistema y calcule las salidas.
+            \item Cuando termine la simulación, utilice las salidas para calcular las medidas de desempeño.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tablas de simulación}
+    \begin{itemize}
+        \item Se diseña de forma tal que cada paso dependa únicamente de entradas del modelo o de uno o varios pasos o valores previamente computados.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tablas de simulación}{Columnas}
+    \begin{itemize}
+        \item Cada columna puede contener:
+        \begin{enumerate}
+            \item Una actividad asociada con una entrada del modelo.
+            \item Una variable aleatoria definida como una entrada del modelo.
+            \item Un estado del sistema.
+            \item Un evento, o la hora del reloj de un evento.
+            \item Una salida del modelo.
+            \item Una respuesta o indicador.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tablas de simulación}{Filas}
+    \begin{itemize}
+        \item Cada fila puede representar:
+        \begin{enumerate}
+            \item La ocurrencia de uno o más eventos.
+            \item El progreso de una entidad a través del sistema.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Uso de aleatorios}
+    \begin{itemize}
+        \item Es una buena práctica utilizar una secuencia de aleatorios y continuar de una manera sistemática, sin utilizar más de una vez la misma secuencia en un problema dado.
+        \item Si la misma secuencia es usada de forma repetida, pueden ocurrir sesgos estadísticos u otros efectos no deseados que afecten los resultados.
+    \end{itemize}
+\end{frame}

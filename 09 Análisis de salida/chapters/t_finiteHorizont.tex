@@ -1,0 +1,126 @@
+\section[Horizonte finito]{Análisis de Simulación con horizonte finito}
+
+%\begin{frame}{Análisis de Simulación con horizonte finito}
+%    \begin{itemize}
+%        \item Un modelo de simulación de horizonte finito puede analizarse con las metodologías estadísticas tradicionales, las cuales asumen un muestreo aleatorio, es decir, con variables aleatorias independientes e idénticamente distribuidas.
+%        \item Para obtener una muestra aleatoria, se ejecuta la simulación comenzando con las mismas condiciones iniciales y asegurando que los números aleatorios usados dentro de cada réplica sean independientes. Cada réplica debe terminar también bajo las mismas condiciones.
+%        \item Debe notarse que la independencia puede conseguirse en las estadísticas entre las réplicas. En tal caso se dice que las réplicas son independientes. Los datos dentro de la réplica pueden no ser independientes.
+%    \end{itemize}
+%\end{frame}
+
+\begin{frame}{Análisis de Simulación con horizonte finito}
+    El análisis estadístico en este caso se basa en tres requerimientos básicos:
+    \begin{enumerate}
+        \item Las observaciones son independientes.
+        \item Las observaciones provienen de muestras con idéntica distribución.
+        \item Las observaciones son extraidas de una distribución normal (o se tienen suficientes observaciones para recurrir al teorema del límite central).
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Análisis de Simulación con horizonte finito}
+    \begin{itemize}
+        \item Suponga que se tienen $n$ réplicas de una simulación. Sea $Y_{rj}$ la $j$-ésima observación de la réplica $r$ para $j=1,2,\dots,m_r$, donde $m_r$ es el número de observaciones en la réplica $r$, y $r=1,2,\dots,n$.
+        \item El promedio muestral de cada réplica es:
+    \[\overline{Y_r}=\frac{1}{m_r}\sum_{j=1}^{m_r}{Y_{rj}} \qquad \text{o} \qquad \overline{Y_r}=\frac{1}{T_E}\int_{0}^{T_E}{Y_r(t) dt}\]
+        \item $\overline{Y_r}$ es el promedio muestral de las observaciones dentro de la réplica $r$, es una variable aleatoria que puede ser observada al final de la réplica; por lo tanto, $\overline{Y_r}$ para $r=1,2,\dots,n$, forma una muestra aleatoria.
+    \end{itemize}
+\end{frame}
+    
+\begin{frame}{Determinación del número de réplicas}
+    \begin{itemize}
+        \item El criterio clave de diseño para el experimento será el número de réplicas necesarias. %En otras palabras, se necesita determinar el tamaño de la muestra.
+        \item El enfoque que se tomará es determinar la cantidad de muestras para que podamos tener una alta confianza en la estimación puntual.
+        %\item Como el intervalo de confianza puede formar la base para la toma de decisiones, se puede utilizar el ancho medio del intervalo de confianza para determinar el tamaño muestral.
+        \item La cantidad
+        \[h=t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\]
+        se llama \textit{ancho medio} del intervalo de confianza.
+    \end{itemize}
+\end{frame}    
+
+    
+\begin{frame}{Determinación del número de réplicas}
+    \begin{itemize}
+        \item Hay tres métodos para determinar el tamaño de la muestra:
+        \begin{enumerate}
+            \item Un método iterativo basado en la distribución $t$.
+            \item Un método aproximado basado en la distribución normal.
+            \item El método de la razón de ancho medio.
+        \end{enumerate}
+        \item Todos los métodos asumen que se cuenta con un conjunto de réplicas piloto $n_0$. %representativas de la población bajo estudio.
+        %\item Cuando los datos no están normalmente distribuidos, se debe apelar al teorema de central para obtener resultados aproximados.
+        %\item El supuesto de normalidad está típicamente justificado cuando las estadísticas entre réplicas se basan en promedios dentro de las réplicas.
+    \end{itemize}
+\end{frame}  
+
+\begin{frame}{Determinación del número de réplicas}{Método iterativo con la distribución t}
+    \begin{itemize}
+        %\item El intervalo de confianza para un estimador puede servir como base para determinar el número de réplicas requeridas en la muestra.
+        
+        \item Se fija un error máximo, $\epsilon$, en el ancho medio, seleccionando un número de réplicas $n$ que satisfaga:
+        \[h=t_{\alpha/2,n-1}\frac{s}{\sqrt{n}}\leq \epsilon\]
+        \item Sin embargo, $t_{\alpha/2,n-1}$ depende de $n$, por lo tanto, la ecuación anterior es iterativa. 
+        \item Se deben probar varios valores de $n$ hasta que se satisface la condición.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Determinación del número de réplicas}{Método aproximado basado en la distribución normal}
+    \begin{itemize}
+        %\item Alternativamente, el número de réplicas requeridas se puede aproximar usando la distribución normal.
+        \item Resolviendo la ecuación anterior para $n$ se obtiene:
+        \[n\geq \left(\frac{t_{\alpha/2,n-1} s}{\epsilon}\right)^2\]
+        \item A medida que $n$ crece, $t_{\alpha/2,n-1}$ converge hacia el $100(1-\alpha/2)$ punto  porcentual de la distribución normal estándar $z_{\alpha/2}$.
+        \item Lo cual arroja la siguiente aproximación:
+        \[n\geq \left(\frac{z_{\alpha/2} s}{\epsilon}\right)^2\]
+        \item Esta ecuación generalmente funciona bien para valores de $n$ grandes ($n>50$).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Determinación del número de réplicas}{Método aproximado basado en la distribución normal para proporciones}
+    \begin{itemize}
+        \item Si la medida de desempeño de interés es una proporción, se puede utilizar un método diferente. Un intervalo de confianza de $100\times(1-\alpha)\%$ para una proporción $p$ tiene la forma:
+        \[\hat{p}\pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]
+        donde $\hat{p}$ es el estimador de $p$.
+        \item A partir de esto, se puede determinar el número de réplicas mediante la siguiente ecuación:
+        \[n=\left(\frac{z_{\alpha/2}}{\epsilon}\right)^2 \hat{p}(1-\hat{p})\]
+        \item Una corrida piloto servirá para obtener el valor inicial del estimado $\hat{p}$.
+    \end{itemize}
+\end{frame}
+
+%%%% EJERCICIO 3.4 pagina 82-108 de Rossetti
+
+\begin{frame}{Determinación del número de réplicas}{Método de la razón de ancho medio}
+    \begin{itemize}
+        \item Sea $h_0$ el valor inicial del ancho medio de una corrida piloto: 
+        \[h_0=t_{\alpha/2,n_0-1}\frac{s_0}{\sqrt{n_0}}\]
+        \item Resolviendo para $n_0$ se obtiene:
+        \[n_0=t^2_{\alpha/2,n_0-1}\frac{s^2_0}{h^2_0}\]
+        \item En general, para cualquier $n$ se tiene:
+        \[n=t^2_{\alpha/2,n-1}\frac{s^2}{h^2}\]
+        \item Asumiendo que $t^2_{\alpha/2,n-1}\approx t_{\alpha/2,n_0-1}$ y que $s^2 \approx s^2_0$, a partir de la razón de $n_0$ a $n$ se obtiene que:
+        \[n\cong n_0\frac{h^2_0}{h^2}=n_0\left(\frac{h_0}{h}\right)^2\]
+        %que se conoce como la ecuación de la razón del ancho medio.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Determinación del número de réplicas}
+    \begin{itemize}
+        \item Para los métodos iterativo y de aproximación normal se requiere de un valor inicial para $s$. Este se puede obtener corriendo una muestra piloto (p.e. $n_0=10$).
+        \item Cuando se ejecutan varias replicas en Arena, el reporte provee un intervalo de confianza de 95\% para las medidas de desempeño. 
+        \item A partir del reporte del ancho medio puede obtenerse la desviación estándar como:%Arena no reporta la desviación estándar, sino directamente el ancho medio para un intervalo de confianza de 95\%.
+         \[s_0=\frac{h_0\sqrt{n_0}}{t_{\alpha/2,n_0-1}}\]
+        %\item Dado un valor de $s$, se puede definir un valor del error máximo y utilizar cualquiera de las fórmulas.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Determinación del número de réplicas}
+    \begin{itemize}
+        \item El error máximo, $\epsilon$, depende del problema y de la medida de desempeño específica que se esté observando. % Está bajo el control subjetivo del analista. El analista debe determinar un error razonable para la situación dada.       
+        \item Debe considerarse que cuando se evalúa $n$, el error máximo $\epsilon$, está en el denominador elevado al cuadrado. %Esto implica que valor pequeños de $E$ resultarán en tamaños de muestra muy grandes.
+        \item Si se tiene más de una medida de desempeño de interés, se puede usar cualquiera de las técnicas para determinar el número de réplicas necesarias para cada medida y utilizar la mayor entre todas. % If you have more than one performance measure of interest, you can use these sample size techniques for each of your performance measures and then use the maximum sample size required across the performance measures.
+    \end{itemize}
+\end{frame}
+
+%%Sequential sampling
+
+%%%% EJERCICIO 7.2 pagina 310-336 de Rossetti

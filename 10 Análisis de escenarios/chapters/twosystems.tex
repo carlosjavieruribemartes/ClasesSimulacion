@@ -1,0 +1,102 @@
+\section{Comparación de dos sistemas}
+ %Comparing two systems
+\begin{frame}{Comparación de dos sistemas}
+    \begin{itemize}
+        \item Suponga que se tienen muestras de dos poblaciones (configuraciones del sistema): $X_{11}, X_{12},\dots,X_{1n_1}$ una muestra de tamaño $n_1$ de la configuración del sistema 1 y $X_{21}, X_{22},\dots,X_{2n_2}$ una muestra de tamaño $n_2$ de la configuración del sistema 2, las cuales representan una medida de desempeño que será utilizada para determinar cuál de los dos sistemas es preferido.
+        \item Asuma que cada configuración tiene una media poblacional desconocida para la medida de desempeño, $E[X_1]=\theta_1$ y $E[X_2]=\theta_2$.
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Comparación de dos sistemas}
+    \begin{itemize}
+        \item El problema es determinar, con alguna confianza estadística, si $\theta_1<\theta_2$ o si $\theta_1>\theta_2$. 
+        \item Si se define $\theta=\theta_1-\theta_2$ como la diferencia promedio en el desempeño de los dos sistemas, basta con determinar si $\theta>0$ o $\theta<0$, para determinar si $\theta_1<\theta_2$ o si $\theta_1>\theta_2$.
+        \item Es decir, es suficiente concentrarse en la diferencia del desempeño de los sistemas más que en los valores de cada uno.
+    \end{itemize}
+\end{frame} 
+
+\begin{frame}{Comparación de dos sistemas}
+    \begin{itemize}
+        \item Calcule un intervalo de confianza (IC) para $\theta=\theta_1-\theta_2$.
+        \item Si IC está totalmente a la izquierda de 0, entonces hay evidencia estadística fuerte de que $\theta_1-\theta_2<0$ o $\theta_1 < \theta_2$.
+        \item Si IC está totalmente a la derecha de 0, entonces hay evidencia estadística fuerte de que $\theta_1-\theta_2>0$ o $\theta_1 > \theta_2$.
+        \item Si IC contiene al 0, entonces no hay evidencia estadística de que alguno de los sistemas sea mejor que el otro.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo Independiente}
+    \begin{itemize}
+        \item El muestre independientes implica que secuencias diferentes e independientes de númeroes aleatorios serán utilizadas para simular los dos sistemas.
+        \item Esto implica que todas las observaciones del sistema 1 simulado son estadísticamente independientes de las observaciones del sistema 2 simulado. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo Independiente}
+    \begin{itemize}
+        \item Sea $\bar{X_1}$, $\bar{X_2}$, $s_1^2$ y $s_2^2$ las medias muestrales y varianzas muestrales para las dos muestras ($k=1,2$). Entonces:
+        \[\bar{X_k}=\frac{1}{n_k}\sum_{j=1}^{n_k}{X_{kj}}\]
+        \[s_k^2=\frac{1}{n_k-1}\sum_{j=1}^{n_k}{(X_{kj}-\bar{X_k})^2}\]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo Independiente}
+    \begin{itemize}
+        \item Se requiere un estimado de $\theta=\theta_1-\theta_2$, el cual puede ser estimado por la diferencia $\hat{D}=\bar{X_1}-\bar{X_2}$.
+        \item Asumiendo de las muestras son independientes, la varianza de la diferencia es
+        \[Var(\hat{D})=Var(\bar{X_1}-\bar{X_2})=\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}\]
+        donde $\sigma_1^2$ y $\sigma_2^2$ son las varianzas poblacionales (desconocidas).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo Independiente}
+    \begin{itemize}
+        \item Si se puede asumir que ambas poblaciones tienen una varianza común $\sigma^2=\sigma_1^2=\sigma_2^2$, un estimador de $\sigma^2$ se puede definir como:
+        \[s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\]
+        \item Entonces, un intervalo de confianza $(1-\alpha)\%$ para $\theta$ es:
+        \[\hat{D}\pm t_{\alpha/2,v}s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}\]
+        donde $v=n_1+n_2-2$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo Independiente}
+    \begin{itemize}
+        \item Para el caso de varianzas diferentes, un intervalo de confianza $(1-\alpha)\%$ para $\theta$ es:
+        \[\hat{D}\pm t_{\alpha/2,v}\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}\]
+        donde
+        \[v=\left \lfloor{\frac{(s_1^2/n_1+s_2^2/n_2)^2}{\frac{(s_1^2/n_1)^2}{n_1+1}+\frac{(s_2^2/n_2)^2}{n_2+1}}-2}\right \rfloor\]
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo correlacionado}
+    \begin{itemize}
+        \item También conocido como CRN (por las siglas en inglés para \textit{Common Random Numbers}), implica que para cada réplica, los mismos números aleatorios son utilizados para simular ambos sistemas.
+        \item Se continua asumiendo que las observaciones dentro de una muestra son independientes e idénticamente distribuidas; sin embargo, las muestras no son independientes.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo correlacionado}
+    \begin{itemize}
+        \item Se asume que se tiene igual número de réplicas para ambos sistemas, esto es, $n_1=n_2=n$.
+        \item Como cada réplica para los dos sistemas utiliza las mismas secuencias de números aleatorios, la correlación entre $\left(X_{1j},X_{2j}\right)$ será diferente de cero.
+        \item Aún así, cada par será independiente \textit{entre} réplicas.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo correlacionado}
+    \begin{itemize}
+        \item Para analizar este caso se calculan las diferencias de cada par:
+        \[D_j=X_{1j}-X_{2j} \quad\text{ para } j=1,2,\dots, n\]
+        \item Entonces, $D_1, D_2, \dots, D_n$, forman una muestra aleatoria, que puede ser analizada por los métodos tradicionales.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Muestreo correlacionado}
+    \begin{itemize}
+        \item Un intervalo de confianza para $\theta=\theta_1-\theta_2$, con una significancia $\alpha$, es:
+        \[\hat{ D }=\frac{1}{n}\sum_{j=1}^{n}{D_j}\]
+        \[s_D^2=\frac{1}{n-1} \sum_{j=1}^{n}{\left(D_j-\hat{ D} \right)^2}\]
+        \[\hat{ D }\pm t_{\alpha/2,n-1}\frac{s_D}{\sqrt{n}}\]
+        \item La interpretación del intervalo de confianza resultante es la misma que en el caso del muestreo independiente.
+    \end{itemize}
+\end{frame}

@@ -1,0 +1,35 @@
+\section[Tipos de Simulación]{Tipos de Simulación con respecto al Análisis de Salida}
+\begin{frame}{Tipos de simulación}
+    \begin{itemize}
+        \item Los objetivos del estudio, junto con la naturaleza de la operación del sistema, determinan cómo se ejecutan y analizan los experimentos de simulación.
+        \item Los modelos de simulación pueden caer en una de dos categorías según el horizonte de tiempo:\cite{BCN}
+        \begin{itemize}
+            \item Modelos de simulación con terminación, finito o transiente.
+            \item Modelos de simulación sin terminación, infinito o de estado estable.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tipos de simulación}{Simulación con terminación (transiente)}
+ %Finite horizon
+    \begin{itemize}
+        \item En los modelos de simulación con terminación \cite{BCN}:
+        \begin{itemize}
+            \item El sistema corre por un periodo específico de tiempo $T_E$, donde $E$ es el evento específico que termina la simulación.
+            \item La longitud de la simulación y las condiciones iniciales deben estar bien definidas y la longitud debe ser finita.
+            \item El número de réplicas es el parámetro crítico asociado al análisis de salida.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tipos de simulación}{Simulación sin terminación (estado estable)}
+ %Infinite horizon
+    \begin{itemize}
+        \item En los modelos de simulación sin terminación \cite{BCN}:
+        \begin{itemize}
+            \item El sistema corre continuamente o por lo menos por un periodo muy largo de tiempo $T_E$, especificado por el analista.
+            \item Las condiciones iniciales deben ser especificadas por el analista.
+            \item Las propiedades a observar no deben ser influenciadas por las condiciones iniciales del modelo.
+        \end{itemize}
+    \end{itemize}
+\end{frame}

@@ -1,0 +1,101 @@
+\section{Análisis de datos}
+
+\begin{frame}{Análisis de datos}
+    \begin{itemize}
+        \item El análisis de datos implica el cálculo de varias estadísticas a partir de los datos recopilados:
+    \begin{itemize}
+        \item Estadísticas relacionadas con los momentos (media, desviación estándar, coeficiente de variación, etc.).
+        \item Estadísticas relacionadas con distribuciones (histogramas, q-q plot, p-p plot).
+        \item Estadísticas relacionadas con la dependencia temporal (autocorrelaciones dentro de una serie temporal empírica o correlaciones cruzadas entre dos o más series temporales distintas).
+    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Estimación de media y varianza muestral}
+    \begin{itemize}
+        \item Si las observaciones en una muestra de tamaño $n$ son $x_1,x_2,\dots,x_n$, la media muestral y la varianza muestral están dadas por:
+            \begin{equation*}
+                \bar{X}=\frac{\sum\limits_{i=1}^{n}x_i}{n}
+            \end{equation*}
+            \begin{equation*}
+                S^2=\frac{\sum\limits_{i=1}^{n}{x_i^2}-n\bar{X}^2}{n-1}
+            \end{equation*}
+        %\item 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Estimadores de estadísticas para distribuciones comunes}
+
+    \begin{table}[]
+    \begin{tabular}{|lll|}
+    \hline
+    \rowcolor[HTML]{DAE8FC} 
+    \multicolumn{1}{|l|}{\cellcolor[HTML]{79403D}\textbf{Distribución}} & \multicolumn{1}{l|}{\cellcolor[HTML]{79403D}\textbf{Parámetros}} & \multicolumn{1}{l|}{\cellcolor[HTML]{79403D}\textbf{Estimadores}} \\ \hline
+    \textit{Poisson} & $\alpha$ & $\hat{\alpha}=\bar{X}$ \\ \hline
+    \textit{Exponencial} & $\lambda$ & $\hat{\lambda}=\frac{1}{\bar{X}}$ \\ \hline
+    \textit{Gamma} & $\beta,\theta$ & \begin{tabular}[c]{@{}l@{}}$\hat{\beta}$ ver Tabla estimadores \\ de máxima verosimilitud\\ $\hat{\theta}=\frac{1}{\bar{X}}$\end{tabular} \\ \hline
+    \textit{Normal} & $\mu,\sigma^2$ & \begin{tabular}[c]{@{}l@{}}$\hat{\mu}=\bar{X}$\\ $\hat{\sigma}^2=S^2$\end{tabular} \\ \hline
+    \textit{Lognormal} & $\mu,\sigma^2$ & \begin{tabular}[c]{@{}l@{}}$\hat{\mu}=\bar{X}$ luego \\ de sacar $\ln$ a los datos\\ $\hat{\sigma}^2=S^2$ luego \\ de sacar $\ln$ a los datos\end{tabular} \\ \hline
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}{Histogramas}
+    \begin{itemize}
+        \item Son útiles para la identificación de la forma de una distribución.
+        \begin{itemize}
+            \item El número de clases, $k$ depende del número de observaciones $n$ y de la dispersión de los datos. Puede usarse:
+                \begin{equation*}
+                    k=\sqrt{n}
+                \end{equation*}
+                o
+                \begin{equation*}
+                    k=1+3.322 \log_{10}{n}
+                \end{equation*}
+            \item Si los intervalos son muy anchos el histograma no mostrará  un comportamiento claramente.
+        \end{itemize}
+        %\item Un histograma da una idea, pero no debe usarse como única herramienta de identificación.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Q-Q plot}
+    \begin{itemize}
+        \item Sea $X$ una variable aleatoria con función acumulada de probabilidad $F_x(X)$, entonces el $q$-cuantil de $X$ es aquel valor $\gamma$ tal que $F_x(X)=P(X\leq \gamma)=q$. Si $F$ tiene inversa entonces $\gamma = F^{-1}(q)$.
+        \item Para realizar una Q-Q plot se emplea el siguiente algoritmo:
+        \begin{enumerate}
+            \item Tomar una muestra de los datos $x_i,~ i=1,2,\dots, n$ y ordenarlos para obtener $y_j,~j=1,2,\dots,n$.
+            \item $y_j$ es una estimación del $\left[\frac{j-\left(\frac{1}{2}\right)}{n}\right]$ cuantil de $X$. Esto es $y_j \sim F^{-1}\left[\frac{j-\left(\frac{1}{2}\right)}{n}\right]$.
+            \item Graficar $y_j$ vs $F^{-1}\left[\frac{j-\left(\frac{1}{2}\right)}{n}\right]$
+            \item Si los datos corresponden a la distribución que se está probando, la gráfica debe ser aproximadamente una línea recta.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Q-Q plot}
+    Algunas consideraciones al realizar una Q-Q plot:
+    \begin{itemize}
+        \item Nunca es realmente una línea recta.
+        \item Un punto encima de la línea será probablemente seguido por otro.
+        \item La variación en los extremos es más grande. La linealidad en el centro es más importante que la linealidad en los extremos.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{P-P plot}
+    \begin{itemize}
+        \item Utiliza la probabilidad acumulada para verificar si una muestra de datos sigue una distribución de probabilidad en particular, mediante el siguiente algoritmo:
+        \begin{enumerate}
+        \item Tomar una muestra de los datos $x_i,~i=1,2,\dots,n$ y ordenarlos para obtener $y_j,~j=1,2,\dots,n$.
+        \item Para cada valor de la muestra calcular $q_j=\left[\frac{j-\left(\frac{1}{2}\right)}{n}\right]$.
+        \item Graficar $q_j$ vs $F_x(y_j)$.
+        \item Si los datos corrsponden a la distribución que se está probando, la gráfica debe ser aproximadamente un línea recta.
+    \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Diferencias entre Q-Q plot y P-P plot}
+    \begin{itemize}
+        \item Un P-P plot compara la función de probabilidad acumulada de una muestra de datos con una función de probabilidad específica $F(\cdot)$, mientras que un Q-Q plot compara los cuantiles estimados dada una función de probabilidad con una muestra de datos.
+        \item El rango de un P-P plot siempre es entre 0 y 1, el rango del Q-Q plot depende del rango de la función de probabilidad y de los datos observados.
+        \item Un Q-Q plot amplifica las diferencias existentes en las colas del gráfico, mientras que un P-P plot amplifica las diferencias en el centro.
+    \end{itemize}
+\end{frame}

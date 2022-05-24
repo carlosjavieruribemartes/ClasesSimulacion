@@ -1,0 +1,113 @@
+\section{Análisis de múltiples sistemas}
+    %Analyzing multiple systems
+\begin{frame}{Análisis de múltiples sistemas}
+    \begin{itemize}
+        \item En ocasiones se desea desarrollar un \textit{análisis de sensibilidad} del modelo, cuando se desea medir el efecto que tendrán en la simulación cambios en parámetros de entrada claves, lo cual ayuda a determinar qué tan robusto es el modelo a variaciones en los supuestos.
+        %\item Al realizar análisis de sensibilidad, pueden encontrarse muchos factores que deban ser examinados combinados a su vez con otros factores. Esto resultará en un número muy grande de experimentos a correr.
+        \item Además, puede ser deseable comparar el desempeño de múltiples alternativas de configuración para escoger la mejor. Este tipo de análisis se desarrolla utlizando varias técnicas de comparación estadísticas.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Análisis de múltiples sistemas}
+    \begin{itemize}
+        \item Algunos posibles objetivos de este análisis son:
+        \begin{enumerate}
+            \item Estimar cada parámetro, $\theta_i$.
+            \item Comparar cada medida de desempeño $\theta_i$ con algún control $\theta_1$, el cual puede representar el desempeño promedio del sistema existente.
+            \item Realizar todas las comparaciones pareadas, $\theta_i-\theta_j$, para $i \neq j$.
+            \item Seleccionar el mejor $\theta_i$.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Enfoque de Bonferroni}
+    \begin{itemize}
+        \item Suponga que se calculan $C$ intervalos de confianza y que el $i$-ésimo intervalo tiene un nivel de confianza $1-\alpha_i$.
+        \item Sea $S_i$ la afirmación de que el $i$-ésimo intervalo contiene el parámetro (o la diferencia de dos parámetros) que se pretende estimar.
+        \item $S_i$ puede ser cierta o falsa para un conjunto dado de datos, el procedimiento que lleva a la construcción del intervalo se diseña para que $S_i$ sea verdadera con probabilidad $1-\alpha_i$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Enfoque de Bonferroni}
+    \begin{itemize}
+        \item La desigualdad de Bonferroni afirma que:\\
+        $$\textit{P}(\text{todas las }S_i \text{ son ciertas,} i=1,\dots, C)\geq 1 - \sum_{j=1}^{C}{\alpha_j}=1-\alpha_E$$
+        \item Donde $\alpha_E$ es la probabilidad de error total y provee una cota superior para la probabilidad de una conclusión falsa.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Enfoque de Bonferroni}
+    \begin{itemize}
+        \item Para realizar un experimento que involucre $C$ comparaciones, primero seleccione la probabilidad de error total, digamos $\alpha_E=0.05$. 
+        \item Luego, los $\alpha_j$ individuales se pueden seleccionar todos iguales a $\alpha_j=\alpha_E/C$, o diferentes, según se desee.
+        \item Entre más pequeño sea el valor de $\alpha_j$, más ancho será el $j$-ésimo intervalo de confianza.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Enfoque de Bonferroni}
+    \begin{itemize}
+        \item Una ventaja del enfoque de Bonferroni es que funciona de manera similar cuando los modelos de diseños alternativos se corren con muestras independientes o con CRN.
+        \item Una desventaja es que la anchura de cada intervalo se incrementa a medida que se incrementa el número de comparaciones.
+        \item Alrededor de 20 comparaciones es un límite máximo práctico.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{ICs individuales}
+	\begin{itemize}
+		\item Construya un IC de $100(1-\aplha_i)\%$, donde el número de intervalos es $C=K$.
+		\item Este tipo de procedimiento es más utilizado para estimar múltiples parámetros de un solo sistema.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Comparación con un sistema existente}
+	\begin{itemize}
+		\item Construya un IC de $100(1-\alpha_i)\%$ para el parámetro $\theta_i-\theta_1$, donde $i=2,3,\dots_K$.
+		\item Este procedimiento se utiliza para comparar distintas alternativas con el sistema actual para identificar cuál es el mejor.
+		\item Se asume que $\theta_1$ es la medida de desempeño para el sistema actual.
+		\item El número de intervalos es $C=K-1$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Todas las comparaciones por pares}
+	\begin{itemize}
+		\item Para cualquier par de sistemas $i\neq j$, construya un IC de $100(1-\alpha_{ij})\%$ para $\theta_i-\theta_j$.
+		\item Compara todos los diseños con los demás.
+		\item Con $K$ diseños, el número de CIs a construir es $C=K(K-1)/2$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Selección del mejor}
+\begin{enumerate}
+	\item Especifique el nivel de confianza $1/k < 1-\alpha < 1$, la diferencia significativa práctica $\epsilon > 0$, un número inicial de réplicas $R_0 \geq 10$. Calcule 
+	\[t=t_{1-\left(1-\alpha/2\right)^{\frac{1}{k-1}},R_0-1}\]
+	y obtenga la constante de Rinnott $h=h\left(R_0,K,1-\alpha/2\right)$.
+	
+	\item Realice $R_0$ réplicas de cada diseño y calcule para todo $i=1,2,\dots,K$
+	\[\bar{Y_{.i}}=\frac{1}{R_0}\sum_{r=1}^{R_0}{Y_{ri}}\]
+	\[s_{i}^{2}=\frac{1}{n_0-1}\sum_{r=1}^{R_0}{\left(Y_{ri}-\bar{Y_{.i}}\right)^2}\]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Selección del mejor}
+    \begin{enumerate}\setcounter{enumi}{2}
+        \item Calcule un umbral de detección para todo $i\neq j$
+            \[W_{ij}=t\left(\frac{S_i^2+S_j^2}{R_0}\right)^2\]
+        \begin{itemize}
+            \item Si mayor es mejor, forme un subconjunto $S$ con cada diseño $i$ tal que
+            	\[\bar{Y_{.i}}\geq \bar{Y_{.j}}-\max \{0, W_{ij}-\epsilon\} \quad \forall j\neq i\]
+            \item Si menor es mejor, forme un subconjunto $S$ con cada diseño $i$ tal que
+            	\[\bar{Y_{.i}}\leq \bar{Y_{.j}}-\max \{0, W_{ij}-\epsilon\} \quad \forall j\neq i\]
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Selección del mejor}
+	\begin{enumerate}\setcounter{enumi}{3}
+        \item Si el subconjunto $S$ contiene un solo diseño, termine, ese es el mejor diseño. De lo contrario, calcule el número de réplicas para todos los diseños en $S$, mediante:
+        \[R_i=\max \{R_0,\lceil \left(hS_i/\epsilon\right)^2 \rceil \}\]
+        \item Corra $R_i-R_0$ réplicas para todo sistema $i\in S$.
+        \item Calcule para todo diseño $i$ en $S$
+        \[\bar{\bar{Y_{.i}}}=\frac{1}{R_i}\sum_{r=1}^{R_i}{Y_{ri}}\]
+        Si mayor es mejor, seleccione aquel diseño $i$ con mayor $\bar{\bar{Y_{.i}}}$ . Si menor es mejor, seleccione el diseño $i$ con menor $\bar{\bar{Y_{.i}}}$.
+    \end{enumerate}
+\end{frame}

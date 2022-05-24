@@ -1,0 +1,85 @@
+\section{Modelos de colas}
+
+\begin{frame}{Simulación de un modelo de colas}
+    \begin{itemize}
+        \item Los estados del sistema de un modelo de colas consisten en el número de unidades en el sistema y el estado del sistema (ocupado o desocupado).
+        \item Los eventos típicos representan la llegada de un nuevo cliente, el inicio de la atención y la salida de un cliente.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tabla de simulación para un modelo de colas}
+    \begin{itemize}
+        \item La simulación de colas requiere conservar una lista de eventos para determinar qué sigue a continuación, llamada \textit{calendario de eventos}.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Tabla de simulación para un modelo de colas}
+\begin{table}[]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{794033} 
+{\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}c@{}}Cliente\\ número\end{tabular}}} & {\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}c@{}}T. entre\\ llegada\\ (activ.)\end{tabular}}} & {\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}c@{}}Hora\\ llegada\\ (reloj)\end{tabular}}} & {\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}c@{}}Hora inicio\\ servicio \\ (reloj)\end{tabular}}} & {\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}c@{}}T. de\\ servicio\\ (activ.)\end{tabular}}} & {\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}c@{}}Hora fin\\ servicio\\ (reloj)\end{tabular}}} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} 1} & {\color[HTML]{FFFFFF} 0}  & {\color[HTML]{FFFFFF} 0} & {\color[HTML]{FFFFFF} 0} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 2} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 1} & {\color[HTML]{FFFFFF} 3} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} 3} & {\color[HTML]{FFFFFF} 4} & {\color[HTML]{FFFFFF} 6} & {\color[HTML]{FFFFFF} 6} & {\color[HTML]{FFFFFF} 3} & {\color[HTML]{FFFFFF} 9} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} 4} & {\color[HTML]{FFFFFF} 1} & {\color[HTML]{FFFFFF} 7} & {\color[HTML]{FFFFFF} 9} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 11} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} 5} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 9} & {\color[HTML]{FFFFFF} 11} & {\color[HTML]{FFFFFF} 1} & {\color[HTML]{FFFFFF} 12} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} 6} & {\color[HTML]{FFFFFF} 6} & {\color[HTML]{FFFFFF} 15} & {\color[HTML]{FFFFFF} 15} & {\color[HTML]{FFFFFF} 4} & {\color[HTML]{FFFFFF} 19} \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Calendario de eventos}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\begin{tabular}{|l|c|c|}
+\hline
+\rowcolor[HTML]{794033} 
+{\color[HTML]{FFFFFF} \textbf{Evento}} & \multicolumn{1}{l|}{\cellcolor[HTML]{794033}{\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}l@{}}Cliente\\ número\end{tabular}}}} & \multicolumn{1}{l|}{\cellcolor[HTML]{794033}{\color[HTML]{FFFFFF} \textbf{\begin{tabular}[c]{@{}l@{}}Hora del\\ reloj\end{tabular}}}} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Llegada} & {\color[HTML]{FFFFFF} 1} & {\color[HTML]{FFFFFF} 0} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Salida} & {\color[HTML]{FFFFFF} 1} & {\color[HTML]{FFFFFF} 2} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Llegada} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 2} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Salida} & {\color[HTML]{FFFFFF} 2} & {\color[HTML]{FFFFFF} 3} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Llegada} & {\color[HTML]{FFFFFF} 3} & {\color[HTML]{FFFFFF} 6} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Llegada} & {\color[HTML]{FFFFFF} 4} & {\color[HTML]{FFFFFF} 7} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Salida} & {\color[HTML]{FFFFFF} 3} & {\color[HTML]{FFFFFF} 9} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Llegada} & {\color[HTML]{FFFFFF} 5} & {\color[HTML]{FFFFFF} 9} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Salida} & {\color[HTML]{FFFFFF} 4} & {\color[HTML]{FFFFFF} 11} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Salida} & {\color[HTML]{FFFFFF} 5} & {\color[HTML]{FFFFFF} 12} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Llegada} & {\color[HTML]{FFFFFF} 6} & {\color[HTML]{FFFFFF} 15} \\ \hline
+\rowcolor[HTML]{F28165} 
+{\color[HTML]{FFFFFF} Salida} & {\color[HTML]{FFFFFF} 6} & {\color[HTML]{FFFFFF} 19} \\ \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Medidas de desempeño}
+\begin{itemize}
+    \item Algunas de las medidas de desempeño de interés son:
+\end{itemize}
+\[\text{T. promedio de espera}=\frac{\text{T. total de espera de los clientes}}{\text{Número total de clientes}}\]
+\[\text{Probabilidad de esperar}=\frac{\text{Número de clientes que esperan}}{\text{Número total de clientes}}\]
+\[\text{Utilización del servidor}=\frac{\text{T. total que el servidor está ocupado}}{\text{T. total de la simulación}}\]
+\[\text{T. promedio de los clientes en fila}=\frac{\text{T. total de espera de los clientes}}{\text{No. total de clientes que esperan}}\]
+\[\text{T. promedio en el sistema}=\frac{\text{T. total de los clientes en el sistema}}{\text{No. total de clientes}}\]
+\end{frame}
