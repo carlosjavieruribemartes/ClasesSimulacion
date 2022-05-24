@@ -1,0 +1,51 @@
+\section{Simulación por eventos discretos}
+
+\begin{frame}{Definición}
+    \begin{itemize}
+        \item Se refiere al proceso de modelar sistemas en los cuales las variables de estado cambian de forma instantánea en puntos separados en el tiempo \cite{LK}.
+        \item El sistema es modelado en términos de su \textit{estado} a lo largo del tiempo, de las entidades, de los recursos y de las actividades y eventos que causan cambios en el estado del sistema \cite{BCN}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Proceso de modelado}
+    \begin{itemize}
+        \item Registra los cambios en las variables de estado en los instantes en que ocurren eventos y realiza el cálculo de las medidas de desempeño con base en el valor de las variables. 
+        \item Usa tiempos definidos para las actividades (pueden ser aleatorios).
+        \item Actualiza el \textit{reloj} entre un evento y otro, llevando un registro de los siguientes eventos en el \textit{calendario de eventos}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Componentes del modelo}
+    \begin{itemize}
+        \item \textit{Estado del sistema}:  Conjunto de variables de estado necesarias para describir el sistema en un momento dado.
+        \item \textit{Reloj}: Variable que almacena el valor actual del tiempo simulado.
+        \item \textit{Calendario de eventos}: Lista que contiene en orden cronológico los siguientes eventos programados.
+        \item \textit{Acumuladores estadísticos}: Variables utilizadas para almacenar información acerca del desempeño del sistema.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Medidas de desempeño}
+    Al correr el modelo se emplean fórmulas para calcular las medidas de desempeño. Por ejemplo, para un modelo de colas, las medidas de desempeño se pueden calcular mediante:
+
+    \begin{itemize}
+        \item $W=\frac{\sum_{i=1}^{N}{F_i}}{N}$
+        \item $W_q=\frac{\sum_{i=1}^{N}{D_i}}{N}$
+        \item $L_q=\frac{\int_{0}^{T}Q(t)dt}{T}$
+        \item $\rho=\frac{\int_{0}^{T}B(t)dt}{T}$
+        \item $P(\text{W})=\frac{\sum_{i=1}{N}{R_i}}{N}$
+    \end{itemize}        
+\end{frame}
+
+\begin{frame}{Medidas de desempeño}
+    Siendo:
+    \begin{itemize}
+        \item $D_i$ el tiempo que la entidad espera $i$ en cola.
+        \item $F_i$ es el tiempo total que gasta en el sistema la entidad $i$. 
+        \item $Q(t)$ es el número de entidades en cola en el instante $t$.
+        \item $B(t)$ es igual a 1 si el servidor está ocupado en el instante $t$ y 0 de lo contrario.
+        \item $R_i$ es igual a 1 si la entidad $i$ debe esperar en cola y 0 de lo contrario.
+        \item $N$ es el número total de entidades en la simulación.
+        \item $T$ es el tiempo total simulado.
+    \end{itemize}
+\end{frame}
+

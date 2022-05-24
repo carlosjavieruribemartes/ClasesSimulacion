@@ -1,0 +1,216 @@
+\section[Técnicas de generación]{Técnicas de generación de números aleatorios}
+
+\begin{frame}{Generación de números pseudo-aleatorios}
+    \begin{itemize}
+        \item Generar números aleatorios a través de un algoritmo  remueve la verdadera aleatoriedad, toda vez que el patrón puede ser repetido \cite{BCN}.
+        %\item De allí que se hable de números \textit{pseudo-aleatorios}.
+        \item Se busca generar una secuencia de números que \textit{imite} las propiedades de los números aleatorios  \cite{BCN}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Técnicas para generación de números aleatorios}
+    \begin{itemize}
+        \item Una técnica adecuada debe tener las siguientes características:
+            \begin{itemize}
+                \item Eficiencia \cite{PSD}.
+                \item Periodo máximo \cite{PSD}.
+                \item Secuencia reproducible \cite{PSD}.  
+                \item Portabilidad \cite{LK}.
+            \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cuadrados medios de Von Neumann y Metropolis}
+    %Fue propuesto en la década de los años cuarenta del siglo XX por Von Neumann y Metropolis. Requiere una semila $X_0$, la cual es elevada al cuadrado para seleccionar los $D$ dígitos del centro. El método es el siguiente:
+    \begin{enumerate}
+        \item Seleccione una \textit{semilla} $X_0$ con $D$ dígitos ($D>3$).
+        \item Sea $Y_0$ el resultado de elevar $X_0$ al cuadrado, defina $X_1$ igual a los $D$ dígitos del centro de $Y_0$ y sea $R_1=0.X_1$.
+        \item Sea $Y_i$ el resultado de elevar $X_i$ al cuadrado, defina $X_{i+1}$ igual a los $D$ dígitos del centro de $Y_i$ y sea $R_{i+1}=0.X_{i+1}$.
+        %\item Repita el paso 3 hasta obtener los $n$ números $R_i$ deseados.
+    \end{enumerate}
+    
+    %Si en algún punto no es posible obtener los $D$ dígitos del centro del número $Y_i$, agregue ceros a la izquierda de éste.
+\end{frame}
+
+\begin{frame}{Generador congruencial lineal}
+        \begin{itemize}
+        \item Utiliza la siguiente relación recursiva \begin{equation*}
+            X_{i+1}=\left(aX_i+c\right)\mod m, \quad i=0,1,2,\dots
+        \end{equation*}
+        %\item Produce una secuencia de enteros $X_1, X_2, \dots$ entre 0 y $m-1$ siguiendo la relación recursiva \begin{equation*}
+        %    X_{i+1}=\left(aX_i+c\right)\mod m, \quad i=0,1,2,\dots
+        %\end{equation*}
+        \item El valor inicial $X_0$ es llamado \textit{semilla}, $a$ es el \textit{multiplicador}, $c$ es el \textit{incremento} y $m$ el \textit{módulo}, todos enteros no negativos.
+        \item Para obtener $R_i$ emplee:
+        \begin{equation*}R_i=\frac{X_i}{m}, \quad i=1,2,\dots\end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generador congruencial lineal}
+    
+    \begin{itemize}
+        \item Los valores de $a, c, m$ y $X_0$ afectan directamente las propiedades estadísticas y el periodo de la secuencia generada \cite{BCN}.
+        \item Deben satisfacerse las siguientes relaciones:
+        \begin{itemize}
+            \item $a < m$
+            \item $c < m$
+            \item $m > 0$
+            \item $X_0 < m$
+        \end{itemize}
+        \item La secuencia se repetirá con periodo $p\leq m$, por lo que el generador alcanza el periodo máximo cuando $p=m$
+    \end{itemize}
+\end{frame}
+
+%\begin{frame}{Generadores congruenciales lineales}
+%    \begin{block}{Actividad en clase}{Use el método de congruencial lineal para generar una secuencia de números aleatorios definiendo una semilla, un multiplicador y un incremento, considerando un módulo $m=100$. Determine la longitud del ciclo de la secuencia generada.} 
+%    \end{block}
+%\end{frame}
+
+%\begin{frame}{Generadores congrenciales mixtos}
+%    \begin{itemize}
+%        \item Las condiciones siguientes aseguran que el generador congruencial mixto que las satisfaga tendrá periodo máximo \cite{PSD, LK}:
+%        \begin{enumerate}
+%            \item El único entero positivo que divide exactamente a $m$ y a $c$ es 1, es decir, son primos entre sí.
+%            \item Si $q$ es un número primo que divide a $m$, entonces $q$ también divide a $a-1$.
+%            \item Si 4 divide a $m$, entonces 4 también divide a $a-1$.
+%        \end{enumerate}
+%    \end{itemize}
+%\end{frame}
+
+%\begin{frame}{Generadores congrenciales mixtos}
+%    En la siguiente tabla se indican los generadores congruenciales lineales mixtos propuestos por Coveyou y MacPherson (1967) y por Kobayashi (1978) \cite{PSD}.
+%    \begin{table}[]
+%    \begin{tabular}{|l|l|l|}
+%    \hline
+%    \textbf{Parámetros} & \textbf{Kobayashi} & \textbf{\begin{tabular}[c]{@{}l@{}}Coveyou y\\ MacPherson\end{tabular}} \\ \hline
+%    $a$ & 314.159.269 & $5^15$ \\ \hline
+%    $c$ & 453.806.245 & 1 \\ \hline
+%    $m$ & $2^{31}$ & $2^{35}$ \\ \hline
+%    \end{tabular}
+%    \end{table}
+%\end{frame}
+
+%\begin{frame}{Generadores congruenciales lineales}
+%    \begin{itemize}
+%        
+%        \item Por máxima densidad se entiende que los valores asumidos por $R_i, i=1,2,\dots$ no dejen vacíos largos en el intervalo $[0,1]$.
+%        \item Para alcanzar la máxima densidad y evitar ciclos (la recurrencias de la misma secuencia de números generados), el generador debe tener el periodo más largo posible.
+%    \end{itemize}
+%\end{frame}
+
+\begin{frame}{Generador congruencial multiplicativo}
+    \begin{itemize}
+        \item Si el incremento $c=0$, se denomina \textit{método congruencial multiplicativo}.
+        \item No alcanza el periodo máximo ya que la secuencia no contendrá $X_i=0$, sin embargo pueden llegar a alcanzar el periodo $m-1$ si se seleccionan $m$ y $a$ en forma adecuada \cite{PSD}:
+        \begin{itemize}
+            \item $m$ ha de ser un número primo.
+            \item $a$ ha de ser raíz primitiva de $m$, es decir, \begin{equation*}a^n \mod m \neq 1 \quad n=1,\dots, m-2\end{equation*}
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generador congruencial multiplicativo}
+    \begin{itemize}
+    \item La siguiente tabla indica los parámetros evaluados por Fishman y Moore (1986) que tienen buen comportamiento \cite{PSD}.
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+    \begin{table}[]
+    \begin{tabular}{|c|r|}
+    \hline
+    \rowcolor[HTML]{794033} 
+    {\color[HTML]{FFFFFF} \textbf{Parámetros}} & {\color[HTML]{FFFFFF} \textbf{Fishman y Moore}} \\ \hline
+    \rowcolor[HTML]{F28165} 
+    a & 48.271\\ \hline
+    \rowcolor[HTML]{F28165} 
+    m & $2^{31}-1$ \\ \hline
+    \end{tabular}
+    \end{table}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generador congrencial mixto}
+    \begin{itemize}
+        \item Si el incremento $c\neq 0$, se denomina \textit{método congruencial mixto}. 
+        \item Las siguientes condiciones aseguran que el generador congruencial mixto tendrá periodo máximo \cite{PSD, LK}:
+        \begin{enumerate}
+            \item El único entero positivo que divide a $m$ y a $c$ es 1, es decir, son primos entre sí.
+            \item Si $q$ es un número primo que divide a $m$, entonces $q$ también divide a $a-1$.
+            \item Si 4 divide a $m$, entonces 4 también divide a $a-1$.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generadores congrenciales mixtos}
+    \begin{itemize}
+    \item La siguiente tabla indica los generadores congruenciales lineales mixtos propuestos por Coveyou y MacPherson (1967) y por Kobayashi (1978) \cite{PSD}.
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+    \begin{table}[]
+    \begin{tabular}{|c|r|r|}
+    \hline
+    \rowcolor[HTML]{794033} 
+    {\color[HTML]{FFFFFF} \textbf{Parámetros}} & {\color[HTML]{FFFFFF} \textbf{Kobayashi}} & {\color[HTML]{FFFFFF} \textbf{Coveyou y MacPherson}} \\ \hline
+    \rowcolor[HTML]{F28165} 
+    a & 314.159.269 & $5^{15}$ \\ \hline
+    \rowcolor[HTML]{F28165} 
+    c & 453.806.245 & 1 \\ \hline
+    \rowcolor[HTML]{F28165} 
+    m & $2^{31}$ & $2^{35}$ \\ \hline
+    \end{tabular}
+    \end{table}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Métodos congruenciales NO lineales}
+    \begin{itemize}
+        \item \textbf{Algoritmo congruencial cuadrático}: Emplea la relación recursiva: \begin{equation*}
+            X_{i+1}=\left(aX_i^2+bX_i+c\right)\mod m, \quad i=0,1,2,\dots
+        \end{equation*}
+        \item \textbf{Algoritmo de Blum, Blum y Shub}: Es similar al algoritmo congruencial cuadrático, con $a=1, b=0, c=0$, entonces la relación recursiva es:
+        \begin{equation*}
+            X_{i+1}=X_i^2\mod m, \quad i=0,1,2,\dots
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Combinación de generadores congruenciales lineales}
+    \begin{itemize}
+        \item Una manera de conseguir secuencias aleatorias con periodos más largos es combinar dos o más generadores congruenciales multiplicativos.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Generador de Wichmann-Hill}
+    \begin{itemize}
+        \item Consiste en tres generadores congruenciales lineales con módulos primos. Cada uno es utilizado para producir un aleatorio entre 0 y 1.  
+        \item Estos tres resultados se suman, módulo 1, para obtener el resultado final.
+        %\item El algoritmo es el siguiente:
+        \begin{enumerate}
+            \item $x_i=171 x_{i-1} \mod 30269$
+            \item $y_i=172 y_{i-1} \mod 30307$
+            \item $z_i=170 z_{i-1} \mod 30323$
+            \item $r_i=\left(\dfrac{x_i}{30269}+\dfrac{y_i}{30307}+\dfrac{z_i}{30323}\right)\mod 1$
+        \end{enumerate}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{MRG32k3a de L'Ecuyer}
+    \begin{itemize}
+        \item Consiste en dos generadores congruenciales recursivos de tercer orden.
+        \item Estos se combinan para obtener un nuevo aleatorio en cada iteración.
+        %\item El algoritmo es el siguiente:
+        \begin{enumerate}
+        \item $x_i=\left(1403580 x_{i-2}-810728 x_{i-3}\right) \mod \left(2^{32}-209\right)$
+        \item $y_i=\left(527612 y_{i-1}-1370589 y_{i-3}\right) \mod \left(2^{32}-22853\right)$
+        \item $z_i=\left(x_{i}-y_{i}\right) \mod \left(2^{32}-209\right)$
+        \item $r_i=\dfrac{z_i}{2^{32}-209}$
+    \end{enumerate}
+    \end{itemize}
+
+
+\end{frame}

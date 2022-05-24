@@ -1,0 +1,20 @@
+\section{Convolución}
+
+\begin{frame}{Método de convolución}
+    \begin{itemize}
+        \item La función de distribución de probabilidad de la suma de dos o más variables aleatorias independientes se conoce como \textit{convolución} de las funciones de distribución de probailidades de las variables originales.
+        \item Este método de generación se aplica cuando la variable aleatoria $X$ se puede expresar como la suma de $n$ variables aleatorias que se pueden generar más fácilmente.%: $X=Y_1+Y_2+\cdots+Y_n$.
+        
+        %\item Las variables aleatorias de cuatro de las distribuciones más conocidas (Erlang, normal, binomial y de Poisson) pueden generarse a través de este método.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Método de convolución}{Distribución $k$-Erlang}
+    \begin{itemize}
+        \item La suma de $k$ variables independientes distribuidas exponencialmente, cada una con media $\frac{1}{k\theta}$ sigue una distribución $k$-Erlang con media $\frac{1}{\theta}$.
+        \item Usando el método de convolución, una variable aleatoria $k$-Erlang se puede crear generando $X_1, X_2, \dots , X_k$ como variables exponenciales exponenciales y luego sumarlas para obtener $X$.
+        \begin{equation*}
+            X=\sum_{i=1}^{k} X_i = \sum_{i=1}^{k}{\frac{-\ln{ (R_i)}}{k\theta}}=-\frac{1}{k \theta} \ln{\left(\Pi_{i=1}^{k}{R_i}\right)}
+        \end{equation*}
+    \end{itemize}
+\end{frame}

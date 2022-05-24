@@ -1,0 +1,25 @@
+\section{Aceptación y rechazo}
+
+\begin{frame}{Método de aceptación y rechazo}
+    \begin{itemize}
+        \item Suponga que se tiene un método eficiente para simular una V.A. con función de densidad $r(x)$ tal que $t(x)=c*r(x)>f(x)$ para cualquier valor de $x$.
+        \item Podemos utilizarla para simular una distribución con función de densidad $f(x)$ mediante el siguiente algoritmo:
+        \begin{enumerate}
+            \item Genere $x$ con densidad $r(x)$.
+            \item Genere $y$ uniforme $[0,t(x)]$.
+            \item Si $y\leq f(x)$, devuelva $x$, de lo contrario vuelva al paso 1.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Método de aceptación y rechazo}{Distribución de Poisson}
+    \begin{itemize}
+        \item La función de probabilidad $P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!}$ para $x\geq 0$.
+        \item El procedimiento para generar una V.A. Poisson $N$ con parámetro $\lambda$, es el siguiente:
+        \begin{enumerate}
+            \item Sea $n=0$, $P=1$.
+            \item Genere un número aleatorio $R_{n+1}$ y reemplace $P$ por $P*R_{n+1}$.
+            \item Si $P<e^{-\lambda}$, entonces acepte $N=n$, de lo contrario, rechace el $n$ actual, incremente $n$ en uno y regrese al paso 2.
+        \end{enumerate}
+    \end{itemize}
+\end{frame}

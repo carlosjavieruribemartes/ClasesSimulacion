@@ -1,0 +1,71 @@
+\section{Distribución normal}
+
+\begin{frame}{Distribución normal}
+    \begin{itemize}
+        %\item Muchos métodos se han desarrollado para generar variables aleatorias normalmente distribuidas.
+        \item El método de la transformada inversa no puede ser aplicado fácilmente porque la función de distribución acumulada para una variable aleatoria con distribución normal no puede ser escrita en forma cerrada.
+        \item La función de distribución acumulada de la distribución normal está dada por:
+        \begin{equation*}
+            \Phi (x) = \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi}} e^{-\frac{t^2}{2}}dt, \quad -\infty<x<\infty
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Distribución normal}{Aproximación al Teorema del límite central}
+    \begin{itemize}
+        %\item Aplica el teorema del límite central en variables aleatorias $r\sim U(0,1)$.
+        \item Si $R_1, R_2, \dots, R_n \sim UNIF(0,1)$, entonces \begin{equation*}
+            Z=\frac{\sum {R_i} - \frac{n}{2}}{\sqrt{\frac{n}{12}}}
+        \end{equation*}
+        sigue aproximadamente una distribución normal estándar. 
+        \item Con $n=12$ se obtiene la forma:
+        \begin{equation*}
+            Z=\sum r_i - 6
+        \end{equation*}
+        %\item Este método requiere 12 números aleatorios independientes para generar un solo número aleatorio normal.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Distribución normal}{Método de Box-Muller}
+    %\begin{itemize}
+        %\item Este método genera dos variables aleatorias de una distribución normal estándar y requiere dos números aleatorios uniformes entre 0 y 1:
+        \begin{enumerate}
+            \item Genere dos números aleatorios independientes $R_1$ y $R_2$  de una distribución $UNIF(0,1)$.
+            \item Devuelva \begin{equation*}
+                Z_1=\sqrt{-2 \ln{R_1}} \cos{\left(2\pi R_2\right)}
+            \end{equation*} y \begin{equation*}
+                Z_2=\sqrt{-2 \ln{R_1}} \sen{\left(2\pi R_2\right)}
+            \end{equation*}
+        \end{enumerate}
+        %\item Desafortunadamente el método no es eficiente pues requiere computar las funciones trigonométricas seno y coseno.
+    %\end{itemize}
+\end{frame}
+
+\begin{frame}{Distribución normal}{Método Polar}
+    %\item Es un método alternativo al algoritmo de Box-Muller, pero no necesita funciones trigonométricas:
+    \begin{enumerate}
+        \item Genere dos números aleatorios independientes $R_1$ y $R_2$ de una distribución $UNIF(0,1)$.
+        \item Defina $V_1=2R_1 - 1$,  $V_2=2R_2 -1$ y $S=V_1^2+V_2^2$.
+        \item Si $S>1$ vuelva al paso 1, de lo contrario devuelva \begin{equation*}
+            Z_1=\sqrt{\frac{-2 \ln{S}}{S}}V_1
+        \end{equation*} y \begin{equation*}
+            Z_2=\sqrt{\frac{-2 \ln{S}}{S}}V_2
+        \end{equation*}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Distribución normal}{Método de Inversión de Rao, Boiroju y Reddy}
+    \begin{itemize}
+        \item Emplea un ajuste logístico de la función de distribución acumulada de la distribución normal estándar, dado por:
+        \begin{equation*}
+            \Phi (Z)=\frac{1}{1+e^{-[1.702 Z]}}
+        \end{equation*}
+        \item Usa esta relación como una aproximación para utilizar luego el método de la transformada inversa con el siguiente algoritmo:
+        \begin{enumerate}
+            \item Genere un aleatorio $R\sim UNIF(0,1)$.
+            \item Devuelva \begin{equation*}
+                Z=\frac{-\ln{\left(\frac{1}{R}-1\right)}}{1.702}
+            \end{equation*}
+        \end{enumerate}
+    \end{itemize}    
+\end{frame}

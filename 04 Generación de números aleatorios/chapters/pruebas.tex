@@ -1,0 +1,213 @@
+\section[Pruebas estadísticas]{Pruebas estadísticas para números aleatorios}
+
+\begin{frame}{Pruebas para números aleatorios}
+    \begin{itemize}
+        \item Para verificar si las propiedades deseadas de un conjunto de números aleatorios diferentes tipos de pruebas pueden desarrollarse.
+        \item Para cada prueba debe definirse un nivel de significancia $\alpha$, el cual representa la probabilidad de rechazar la hipótesis nula cuando ésta es cierta:
+        \begin{equation*}
+            \alpha=P(\text{rechazar }H_0|H_0\text{ es cierta})
+        \end{equation*}
+        
+        %\item El analista define este valor para cada prueba. Algunos valores comunes de $\alpha$ son 0.01 y 0.05.
+    \end{itemize}
+\end{frame}
+
+\subsection{Pruebas de uniformidad}
+
+\begin{frame}{Prueba de medias}
+    \begin{itemize}
+        \item Busca comprobar que el valor esperado de los números en la secuencia $R_i$ sea igual a 0.5 mediante las siguientes hipótesis: 
+                \begin{eqnarray*}
+                    H_0:~\mu_{R_i} = 0.5\\
+                    H_1:~\mu_{R_i} \neq 0.5
+                \end{eqnarray*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prueba de medias}
+    %El algoritmo para la prueba de medias es el siguiente:
+    \begin{enumerate}
+        \item Determine el promedio de los $n$ números aletorios de la secuencia: 
+        \begin{equation*}
+            \bar{R}=\frac{1}{n} \sum_{i=1}^{n}{R_i}
+        \end{equation*}
+        \item Calcule los límites de aceptación inferior y superior: 
+                \begin{eqnarray*}
+                    LI_{\bar{R}}=\frac{1}{2}-z_{\alpha/2}\left(\frac{1}{\sqrt{12n}}\right)\\
+                    LS_{\bar{R}}=\frac{1}{2}+z_{\alpha/2}\left(\frac{1}{\sqrt{12n}}\right)
+                \end{eqnarray*}
+        \item Si el valor de $\bar{R}$ está dentro de los límites de aceptación no hay evidencia suficiente para rechazar $H_0$ con un nivel de confianza 1-$\alpha$. 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Prueba de varianza}
+    \begin{itemize}
+        \item Busca determinar si la varianza de la secuencia aleatoria generada es igual a 1/12 mediante las siguientes hipótesis:
+            \begin{eqnarray*}
+                H_0:~\sigma^2_{R_i} = \frac{1}{12}\\
+                H_1:~\sigma^2_{R_i} \neq \frac{1}{12}
+            \end{eqnarray*}        
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}{Prueba de varianza}
+    %La prueba de varianza tiene los siguientes pasos:
+    \begin{enumerate}
+        \item Determine la varianza muestral de la secuencia $R_1, R_2, \dots, R_n$: \begin{equation*}
+            V(R)=\frac{\displaystyle{\sum_{i=1}^{n}{(R_i-\bar{R})^2}}}{n-1}
+        \end{equation*}
+        \item Calcule los límites de aceptación inferior y superior mediante: 
+                \begin{eqnarray*}
+                    LI_{V(R)}=\frac{\chi^2_{\frac{\alpha}{2},n-1}}{12(n-1)}\\
+                    LS_{V(R)}=\frac{\chi^2_{\frac{(1-\alpha)}{2},n-1}}{12(n-1)}
+                \end{eqnarray*}
+        \item Si el valor de $V(R)$ está dentro de los límites de aceptación no hay evidencia suficiente para rechazar $H_0$ con un nivel de confianza 1-$\alpha$. 
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Prueba de frecuencias}
+    \begin{itemize}
+        \item Trata de determinar si el conjunto de números generados se distribuye de acuerdo con la distribución uniforme $\left[0,1\right]$ para lo cual formula las siguientes hipótesis:
+        \begin{eqnarray*}
+            H_0:~R_i \sim U\left[0,1\right]\\
+            H_1:~R_i \not\sim U\left[0,1\right]
+        \end{eqnarray*}
+        %\item Utiliza la prueba chi-cuadrado o Kolmogorov-Smirnov para comparar la distribución del conjunto de números generados con la distribución uniforme.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prueba de frecuencias}{Prueba chi-cuadrado}
+    \begin{itemize}
+        \item Para la distribución uniforme, la frecuencia esperada en cada clase, $E_i$ está dada por: 
+        \begin{equation*}
+            E_i=\frac{N}{n}
+        \end{equation*}
+       para  $n$ clases igualmente espaciadas, donde $N$ es el número total de observaciones.
+        \item Utiliza el estadístico de prueba:
+    \begin{equation*}
+        \chi_0^2=\sum_{i=1}^{n}{\frac{\left(O_i-E_i\right)^2}{E_i}}
+    \end{equation*}
+    donde $O_i$ es la frecuencia observada en la $i$-ésima clase. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prueba de frecuencias}{Prueba chi-cuadrado}
+    \begin{itemize}
+        \item La distribución muestral de $\chi_0^2$ es aproximadamente chi-cuadrado con $n-1$ grados de libertad.
+        \item Si el estadístico de prueba $\chi_0^2$ es menor que el valor $\chi_{\alpha,n-1}^2$ no hay evidencia suficiente para rechazar $H_0$ con un nivel de confianza 1-$\alpha$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prueba de frecuencias}{Prueba Kolmogorov-Smirnov}
+    \begin{itemize}
+        \item Contrasta la función de densidad acumulada $F(x)$ de la distribución teórica con la función de densidad empírica $S_N(x)$ de la muestra de $N$ obsevaciones.
+        \item Se basa en la mayor desviación absoluta entre $F(x)$ y $S_N(x)$ en el rango de la variable aleatoria, utilizando el estadístico de prueba:
+        \begin{equation*}
+            D=max |F(x)-S_N(x)|
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Prueba de frecuencias}{Prueba Kolmogorov-Smirnov}
+    \begin{enumerate}
+        \item Ordene los datos de menor a mayor. Sea $R_{(i)}$ la $i$-ésima menor observación.
+        \item Determine los valores:
+            \begin{eqnarray*}
+                D^+=max_{1\leq i \leq N} \left\{\frac{i}{N}-R_{(i)}\right\} \\
+                D^-=max_{1\leq i \leq N} \left\{R_{(i)} - \frac{i-1}{N}\right\}
+            \end{eqnarray*}
+        \item Calcule $D=max(D^+,D^-)$.
+        \item Identifique el valor crítico $D_{\alpha}$ correspondiente a $\alpha$ y $N$. Esta valor se puede encontrar en las tablas estadísticas de Kolmogorov-Smirnov.
+        \item Si $D\leq D_{\alpha}$ se concluye que no hay evidencia suficiente para rechazar $H_0$ con un nivel de confianza 1-$\alpha$.
+    \end{enumerate}
+\end{frame}
+
+\subsection{Pruebas de independencia}
+
+\begin{frame}{Pruebas de independencia}
+    En su mayoría buscan probar la independencia de los números de un conjunto $R_i$ mediante las hipótesis:
+        \begin{eqnarray*}
+            H_0:~\text{los números del conjunto $R_i$ son independientes}\\
+            H_1:~\text{los números del conjunto $R_i$ no son independientes}
+        \end{eqnarray*}
+\end{frame}
+
+\begin{frame}{Prueba de corridas arriba y abajo}
+    \begin{enumerate}
+        \item Determine una secuencia de unos y ceros así: si $R_{i+1}\leq R_i$ asigne un cero a la secuencia, de lo contrario asigne un uno.
+        \item Defina $C_0$ como el número de corridas en la secuencia (una corrida es cualquier cantidad de unos o ceros consecutivos).
+        \item Determine el estadístico de prueba mediante las ecuaciones:
+            \begin{eqnarray*}
+                \mu_{C_0}=\frac{2n-1}{3} \\
+                \sigma^2_{C_0}=\frac{16n-29}{90}\\
+                Z_0=\left|\frac{C_0-\mu_{C_0}}{\sigma_{C_0}}\right|
+            \end{eqnarray*}
+        \item Si el estadístico $Z_0$ es mayor que el valor crítico de $Z_{\alpha/2}$, se concluye que los números del conjunto $R_i$ no son independientes.
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Prueba de corridas arriba y abajo de la media}
+    \begin{enumerate}
+        \item Determine una secuencia de unos y ceros así: si $R_{i}\leq 0.5$ asigne un cero a la secuencia, de lo contrario asigne un uno.
+        \item Defina $C_0$ como el número de corridas en la secuencia, $n_0$ el número de ceros de ceros y $n_1$ el número de unos.
+        \item Determine el estadístico de prueba mediante las ecuaciones:
+            \begin{eqnarray*}
+                \mu_{C_0}=\frac{2n_0n_1}{n}+0.5 \\
+                \sigma^2_{C_0}=\frac{2n_0n_1(2n_0n_1-n)}{n^2(n-1)}\\
+                Z_0=\frac{C_0-\mu_{C_0}}{\sigma_{C_0}}
+            \end{eqnarray*}
+        \item Si el estadístico $Z_0$ está fuera del intervalo $\left[-Z_{\alpha/2}, Z_{\alpha/2}\right]$ se concluye que los números del conjunto $R_i$ no son independientes.
+    \end{enumerate}
+\end{frame}
+
+%PRUEBA DE POKER GARCIA DUNNA pag 56
+%PRUEBA DE SERIES
+%PRUEBA DE HUECOS
+
+\begin{frame}{Prueba de autocorrelación}
+    \begin{itemize}
+        \item Prueba la correlación entre los números generados y compara la correlación muestral con la correlación esperada de cero.
+        
+        \item Requiere el cálculo de la autocorrelación entre cada $m$ números (siendo conocida $m$ como \textit{lag} o retraso), empezando con el $i$-ésimo número de la secuencia.
+        
+        \item La autocorrelación $\rho_{im}$  entre los siguientes números será de interés $R_i$, $R_{i+m}, R_{i+2m},\dots, R_{i+(M+1)m}$. Donde el valor de $M$ es el entero más grande tal que $i+(M+1)m\leq N$,
+
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Prueba de autocorrelación}
+    \begin{itemize}
+        \item Una autocorrelación diferente de cero implica una falta de independencia en los datos. La siguiente prueba con dos colas es adecuada:
+        \begin{eqnarray*}
+            H_0:~\rho_{im} = 0\\
+            H_1:~\rho_{im} \neq 0
+        \end{eqnarray*}
+        \item Para valores grandes de $M$, la distribución del estimador de $\rho_{im}$, denotado $\hat{\rho}_{im}$, es aproximadamente normal si los valores $R_i$, $R_{i+m}, R_{i+2m},\dots, R_{i+(M+1)m}$ no están correlacionados. 
+        
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Prueba de autocorrelación}
+    \begin{itemize}
+
+        \item El estadístico: 
+        \begin{equation*}
+            Z_0=\frac{\hat{\rho}_{im}}{\sigma_{\hat{\rho}_{im}}}
+        \end{equation*}
+        está normalmente distribuido con media 0 y varianza 1, bajo el supuesto de independencia y para valores grandes de $M$.
+        
+        \item Donde \begin{eqnarray*}
+            \hat{\rho}_{im}&=&\frac{1}{M+1}\left[\sum_{k=0}^{M}{R_{i+km}R_{i+(k+1)m}}\right]-0.25\\
+            \sigma_{\hat{\rho}_{im}}&=&\frac{\sqrt{13M+7}}{12(M+1)}
+        \end{eqnarray*}
+        
+        \item No rechace $H_0$ si $-z_{\alpha/2}\leq Z_0 \leq z_{\alpha/2}$ donde $z_{\alpha/2}$ se puede obtener de la tabla de probabilidades para la distribución chi-cuadrado.
+    \end{itemize}
+    
+\end{frame}
+
+%\begin{frame}{Frame Title}
+%    t_0=\dfrac{\bar{y_1}-\bar{y_2}}{S_p\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}}
+%\end{frame}
